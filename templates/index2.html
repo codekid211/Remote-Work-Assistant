@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Wellness Hub</title>
+    <!-- <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script> -->
+    <style>
+    #header{
+      text-align: center;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+      
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        text-align: center;
+      }
+      
+      /* The Close Button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      * {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  left: 20px;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #1abc9c;
+  overflow: hidden;
+  width: 100%;
+  height:0;
+  transition: .5s ease;
+}
+
+.container:hover .overlay {
+  bottom: 0;
+  height: 100%;
+  width:270px;
+  margin-left: 0px; /* Specify the left margin */
+  margin-right: 300px; /* Specify the right margin */
+  max-width: 200%; 
+}
+
+.text {
+  color: white;
+  font-size: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family:monospace;
+}
+.header {
+  padding: 80px;
+  text-align: center;
+  background:rgba(0,0,0,0.5);
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+.bg {
+  /* The image used */
+  background-image: url("background.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#mindfulness{
+  text-align: center;
+  color: white;
+}
+body  {
+  height: 100%;
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+html{
+  height: 100%;
+}
+
+#m_text{
+  /* background-color: #1abc9c; */
+  width: 100%;
+  height: 100%;
+  color: white;
+
+}
+.highlight-box {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 700px;
+      text-align: left;
+      margin: 0 610px;
+    }
+#ergonomic-tips{
+  text-align: center;
+}   
+#work-life-balance{
+  text-align: center;
+} 
+#Fitbittrial{
+  text-align: center;
+}
+.image-container {
+  margin-left: 635px; /* Specify the left margin */
+  margin-right: 500px; /* Specify the right margin */
+  max-width: 50%;
+}
+#community-support{
+  text-align: center;
+}
+.glow {
+  font-size: 80px;
+  color: #0f0e0e;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #f8f3f5, 0 0 30px #f2eef0, 0 0 40px #f2edf0, 0 0 50px #f5f3f4, 0 0 60px #fcfbfb;
+  }
+  
+  to {
+    text-shadow: 0 0 15px #fff, 0 0 20px #eddfe6, 0 0 20px #f3f2f2, 0 0 40px #faf8f9, 0 0 50px #f4eef1, 0 0 60px #f3e8ee, 0 0 70px #f7f2f4;
+  }
+}
+      </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Remote Wellness Hub</h1>
+    <p>Your go-to place for a healthy remote work lifestyle</p>
+</div>
+
+
+    <section id="mindfulness">
+        <h1 id="m_text">Mindfulness Exercises</h1>
+        <div class="highlight-box">
+          <ul>
+            <li><strong>Mindful Clarity:</strong> Enhances awareness for better focus.</li>
+            <li><strong>Stress Reduction:</strong> Acts as a sanctuary amid life's chaos.</li>
+            <li><strong>Emotional Well-being:</strong> Fosters inner peace and balance.</li>
+            <li><strong>Physical Health:</strong> Linked to lower blood pressure and improved immunity.</li>
+            <li><strong>Self-Reflection:</strong> Provides a space for introspection in our fast-paced world.</li>
+          </ul>
+        </div>
+        <p></p>
+      <button type="button" class="collapsible"> Meditation Guide</button>
+        <div class="content">
+        <h1 class="glow">5 Minutes Meditataion Guide</h1>
+        <video width="320" height="240" controls>
+            <source src= "1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+    </section>
+
+    <section id="ergonomic-tips">
+        <h2 id="m_text">Ergonomic Tips</h2>
+        <div class="slideshow-container">
+
+          <!-- Full-width images with number and caption text -->
+          <div class="mySlides fade">
+            <div class="numbertext">1 / 4</div>
+            <img src="1.jpg" style="width:70%">
+            
+          </div>
+        
+          <div class="mySlides fade">
+            <div class="numbertext">2 / 4</div>
+            <img src="2.png" style="width:70%">
+            
+          </div>
+        
+          <div class="mySlides fade">
+            <div class="numbertext">3 / 4</div>
+            <img src="3.jpg" style="width:50%">
+            
+          </div>
+
+          <div class="mySlides fade">
+            <div class="numbertext">4 / 4</div>
+            <img src= "4.png" style="width:70%">
+            
+          </div>
+        
+          <!-- Next and previous buttons -->
+          <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
+        </div>
+        <br>
+        
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+
+
+    </section>
+
+    <section id="work-life-balance">
+      <h2 id="m_text">Work-Life Balance Tracking</h2>
+      <p>To track and analyze work hours, breaks to help you maintain a healthy work-life balance.</p>
+      <div class="image-container">
+           <a href="wesite.html"><div class="container">
+            <img class="image_container" src="fitness.jpg" alt="Tracker Image">
+              <div class="overlay">
+                <div class="text">Open Tracker</div>
+              </div>
+            </div></a>
+          </div>
+    </section>
+
+    <section id="Fitbittrial">
+      <h2 id="m_text">Personalized Wellness Plans</h2>
+      <button id="authorize-button">Authorize Fitbit</button>
+      <div id="data-container"></div>
+  </section>
+
+    <section id="community-support">
+        <h2 id="m_text">Community Support</h2>
+        <p>Integrate a community forum or chat feature where remote workers can connect, share experiences, and provide
+            support to each other.</p>
+        <p>Facilitate discussions on wellness challenges and solutions, fostering a sense of community among app
+            users.</p>
+        <p><a id="community-link" href="/community">Enter the Community</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Remote Wellness Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+        }
+        
+        const clientId = '23RH83'; // Replace with your Fitbit client ID
+        const redirectUri = 'http://localhost:5173/'; // Replace with your redirect URI
+        const authorizationUrl = `https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}&scope=activity profile`;
+
+        const authorizeButton = document.getElementById('authorize-button');
+        const dataContainer = document.getElementById('data-container');
+
+        authorizeButton.addEventListener('click', () => {
+            window.location.href = authorizationUrl;
+        });
+
+        // Parse the access token from the URL after successful authorization
+        const accessToken = new URLSearchParams(window.location.hash.substr(1)).get('access_token');
+
+        if (accessToken) {
+            // Use the access token to make an API request to get user ID
+            fetch('https://api.fitbit.com/1/user/-/profile.json', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            })
+            .then(response => response.json())
+            .then(profileData => {
+                const userId = profileData.user.encodedId;
+
+                // Display the user ID
+                dataContainer.innerHTML += `<p>User ID: ${userId}</p>`;
+
+                // Use the user ID to make another API request, for example, to get today's activity data
+                fetch(`https://api.fitbit.com/1/user/${userId}/activities/date/today.json`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                })
+                .then(response => response.json())
+                .then(activityData => {
+                    // Display the API response in the data container
+                    dataContainer.innerHTML += `<pre>${JSON.stringify(activityData, null, 2)}</pre>`;
+                })
+                .catch(error => console.error('Error fetching activity data:', error));
+            })
+            .catch(error => console.error('Error fetching user profile:', error));
+        }
+        </script>
+
+</html>

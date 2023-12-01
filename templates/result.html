@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Translation Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #000080;
+        }
+        .result-container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .result-box {
+            width: 60%;
+            padding: 20px;
+            background-color: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .result-box p {
+            margin: 10px 0;
+        }
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Translation Result</h1>
+    <div class="result-container">
+        <div class="result-box">
+            <p><strong>Original Text:</strong> {{ original_text }}</p>
+            <p><strong>Translated Text:</strong> {{ translated_text }}</p>
+        </div>
+        <audio controls autoplay>
+            <source src="{{ audio_file }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</body>
+</html>

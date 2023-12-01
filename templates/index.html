@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MeetAI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #000080;
+        }
+        #input-container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .textbox {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #000080;
+            border-radius: 20px;
+            outline: none;
+        }
+        .textbox:focus {
+            border-color: #87CEEB;
+        }
+        #user_text {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        #target_language {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        #translate-btn {
+            width: 150px;
+            padding: 15px;
+            background-color: #000080;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #translate-btn:hover {
+            background-color: #87CEEB;
+        }
+    </style>
+    <script>
+        function showSpeakText() {
+            document.getElementById('speak_text').innerText = 'Speak';
+        }
+	function playVideo() {
+            var video = document.getElementById('user_video');
+            var fileInput = document.getElementById('video_input');
+            var file = fileInput.files[0];
+            var fileURL = URL.createObjectURL(file);
+            video.src = fileURL;
+            video.style.display = 'block';
+            video.play();
+	}
+    </script>
+
+</head>
+<body>
+    <h1>Welcome to MeetAI- Comprehensive Meeting Solutions</h1>
+    <div id="input-container">
+        <form action="/translate" method="post" enctype="multipart/form-data" onsubmit="showSpeakText()">
+            <input type="file" id="file_input" name="file_input" accept=".txt" class="textbox">
+            <br>
+            <input type="text" id="user_text" name="user_text" class="textbox" placeholder="Or enter text here...">
+            <br>
+            <input type="text" id="target_language" name="target_language" class="textbox" placeholder="Enter target language...">
+            <br>
+            <button type="submit" id="translate-btn">Translate</button>
+        </form>
+        <p id="speak_text"></p>
+        
+        <input type="file" id="video_input" name="video_input" accept=".mp4" class="textbox">
+        <br>
+        <button onclick="playVideo()">Play Video & Download Transcription</button>
+        <video id="user_video" controls style="display: none;">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</body>
+</html>

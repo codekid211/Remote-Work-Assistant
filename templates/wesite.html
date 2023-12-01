@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Timer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* h1 {
+            color: #fbf8f8;
+        } */
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        select, input, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px; /* Curved edges */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px; /* Curved edges */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #timer, #countdown {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        #hours{
+            width: 70px;
+            text-align: center;
+        }  
+        #minutes{
+            width: 70px;
+            text-align: center;
+        } 
+        body {
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            width: 10%; 
+            margin: 0 auto; 
+            border-radius: 50px;
+        }
+        div span {
+            margin: 0 5px;
+            color: rgb(0, 0, 0);
+            font-size: 30px;
+            line-height: 36px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Focus Timer</h2>
+    </header>
+
+    <label for="category">Select Category:</label>
+    <select id="category">
+        <option value="Work">Work</option>
+        <option value="Break">Break</option>
+        <option value="Meetings">Meetings</option>
+    </select>
+
+    <label for="time">Select Time:</label>
+    <div>
+        <input type="number" id="hours" min="0" placeholder="Hours">
+        <span>:</span>
+        <input type="number" id="minutes" min="1" max="59" placeholder="Minutes">
+    </div>
+
+    <button onclick="startTimer()">Start Timer</button>
+    <button onclick="exportLogs()">Export Logs</button>
+
+    <div id="timer"></div>
+    <div id="countdown"></div>
+
+    <script>
+        let timer;
+        let counter = 0;
+        let logs = [];
+        let countdownValue = 0;
+        let startTime;
+
+        function startTimer() {
+            const selectedCategory = document.getElementById("category").value;
+            const selectedTime = parseInt(document.getElementById("hours").value, 10) * 60 + parseInt(document.getElementById("minutes").value, 10);
+
+            if (isNaN(selectedTime) || selectedTime <= 0) {
+                alert("Please enter a valid time.");
+                return;
+            }
+
+            counter = 0;
+            countdownValue = selectedTime * 60;
+            updateCountdownDisplay();
+            startTime = new Date();
+
+            timer = setInterval(function () {
+                counter++;
+
+                if (counter % 20 === 0) {
+                    logs.push({ event: "Look", category: selectedCategory, message: `Look at something 20 meters away!` });
+                }
+
+                if (counter % 40 === 0) {
+                    logs.push({ event: "Break", category: selectedCategory, message: `Take a 5-minute break!` });
+                }
+
+                countdownValue--;
+                updateCountdownDisplay();
+
+                if (countdownValue <= 0) {
+                    clearInterval(timer);
+                    countdownValue = 0;
+                    updateCountdownDisplay();
+		    alert("Timer ended! Take a break! For 20s look at a object 20 meters away");
+                    logTimerDetails(selectedTime);
+                }
+            }, 1000); // 1 second = 1000 milliseconds
+        }
+
+        function updateCountdownDisplay() {
+    const minutes = Math.floor(countdownValue / 60);
+    const seconds = countdownValue % 60;
+    document.getElementById("countdown").innerText = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds} seconds`;
+}
+
+
+        function logTimerDetails(selectedTime) {
+            const endTime = new Date();
+            const durationInSeconds = Math.floor((endTime - startTime) / 1000);
+
+            logs.push({ event: "Timer Start", message: `Timer started for ${selectedTime} minutes.` });
+            logs.push({ event: "Timer End", message: `Timer ended. Total time used: ${durationInSeconds} seconds.` });
+        }
+
+        function exportLogs() {
+            const tsvContent = "Event\tCategory\tMessage\n" +
+                logs.map(log => `${log.event}\t${log.category || ''}\t${log.message}`).join("\n");
+
+            const blob = new Blob([tsvContent], { type: "text/tab-separated-values" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", "logs.tsv");
+            document.body.appendChild(link);
+            link.click();
+        }
+    </script>
+</body>
+</html>
